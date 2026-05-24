@@ -8,9 +8,11 @@
 * **Outcome**: What happened because of this (Parser new succesfully extracts 3/5 fields with 90% accuracy)
 
 
-05/24/26 - Creation of Project
-* **Context**: Needed to shift project from abstract idea to structured development environment
-* **Decision**: * **Documentation**: Created 2 layers of documentation, one being the README.md for the general project outline and the ProjectLog.md for daily project updates
-* **Architecture**: Designed the system architecture for the project going forward and laid out the development roadmap.
-* **Workflow**: Ensured development environments were properly set up and decided on terminal led approach to maintain close control over project and git history.
-*Outcome: Project repository initalized, roadmap defined, and development environment ready for future progress.
+## 05/24/26 - Creation of Project
+
+* **Context:** Needed to shift project from abstract idea to structured development environment.
+* **Decision:**
+    * **Documentation:** Created 2 layers of documentation (README.md and ProjectLog.md).
+    * **Architecture:** Designed the system architecture and roadmap.
+    * **Workflow:** Established terminal-led approach to maintain Git history.
+* **Outcome:** Project repository initialized, roadmap defined, and environment ready.
