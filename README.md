@@ -42,7 +42,9 @@ graph TD
 *Explain map later*
 
 ## Development Roadmap
-This project was developed using a phased, iterative approach, ensuring
+This project was developed using a phased, iterative approach, ensuring production grade quality while allowing for agile development. Phase 1 establishes the base of the project, allowing the agent to perform under a limited and monitored scope. This ensures the fundamentals of the projects are implemented accuretly and efficetnly. Phase 2 introduces enterprise-scale resilience, observability, and integration. 
+
+You can see the detailed road map of both phases here.
 
 ADD ROADMAP HERE
 
