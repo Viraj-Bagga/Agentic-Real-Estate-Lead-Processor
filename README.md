@@ -4,7 +4,40 @@
 This project is developed to be an autonomous, agentic system designed to ingest, qualify, and organize real estate leads.
 
 ## System Architecture 
-*Place Holder*
+```mermaid
+graph TD
+    subgraph Ingestion
+        A[Email/Forms API] --> B{Pydantic Firewall}
+        B -- Failed Validation --> J[Error Log/Hold Bucket]
+    end
+
+    subgraph Intelligence
+        B -- Validated Lead --> C[Semantic Cache]
+        C -- Cache Miss --> D[LangGraph Agent]
+        C -- Cache Hit --> I[Fast Output]
+        D --> E[(Chroma Vector DB)]
+        D --> F[LLM Reasoning]
+    end
+
+    subgraph Reliability
+        D --> G[Audit Logger]
+        D -- Error Detected --> H[Circuit Breaker]
+        H -- System Fault --> K[Admin Alert / Queue Hold]
+    end
+
+    subgraph Feedback_Loop
+        L[Human Correction] --> M[Evaluation Table]
+        M --> F
+    end
+
+    subgraph Output
+        D --> N[CRM/Database Sync]
+    end
+
+    style G fill:#bbf,stroke:#333,stroke-width:2px
+    style H fill:#fbb,stroke:#333,stroke-width:2px
+    style C fill:#dfd,stroke:#333,stroke-width:2px
+    style M fill:#ffd,stroke:#333,stroke-width:2px
 
 ## Development Roadmap
 *I plan to document the whole development lifecycle, from ideation to production*
