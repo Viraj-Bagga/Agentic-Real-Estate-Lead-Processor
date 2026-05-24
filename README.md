@@ -3,7 +3,7 @@
 ## Overview
 This project is developed to be an autonomous, agentic system designed to ingest, qualify, and organize real estate leads.
 
-## System Architecture 
+## System Architecture Map
 ```mermaid
 graph TD
     subgraph Ingestion
@@ -32,7 +32,7 @@ graph TD
 
     subgraph Output
         D --> N[CRM/Database Sync]
-    end
+    end```
 
     style G fill:#bbf,stroke:#333,stroke-width:2px
     style H fill:#fbb,stroke:#333,stroke-width:2px
