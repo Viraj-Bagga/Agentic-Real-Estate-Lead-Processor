@@ -12,7 +12,7 @@
 
 * **Context:** Needed to shift project from abstract idea to structured development environment.
 * **Decision:**
-    * **Documentation:** Created 2 layers of documentation (README.md and ProjectLog.md).
-    * **Architecture:** Designed the system architecture and roadmap.
-    * **Workflow:** Established terminal-led approach to maintain Git history.
+    * **Documentation:** Defined system architecture; implemented modular components for reliability (Circuit Breakers), performance (Semantic Caching), and compliance (Audit Logging).
+    * **Architecture:** Initialized project structure; documented iterative development strategy using a dual-phase roadmap (MVP vs. Enterprise Scaling).
+    * **Workflow:** Configured local development workspace, initialized virtual environment (.venv), and established project security via .gitignore.
 * **Outcome:** Project repository initialized, roadmap defined, and environment ready.
