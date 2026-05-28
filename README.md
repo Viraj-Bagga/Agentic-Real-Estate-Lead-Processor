@@ -3,6 +3,8 @@
 ## Overview
 This project is developed to be an autonomous, agentic system designed to ingest, qualify, and organize real estate leads.
 
+Real estate leads are often unstructured, unverified, and prone to human error. This system automates the ingestion-to-qualification pipeline, ensuring agents only spend time on high-value, validated leads.
+
 ## System Architecture Map
 ```mermaid
 graph TD
