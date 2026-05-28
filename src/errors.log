@@ -1,0 +1,2 @@
+Lead blocked by firewall: Value error, minBudget must be greater than $10: 1.0
+Lead blocked by firewall: Value error, maxBudget must be less than $100,000,000: 50000000000.0

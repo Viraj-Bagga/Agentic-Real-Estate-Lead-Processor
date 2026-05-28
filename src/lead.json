@@ -1,7 +1,7 @@
 {
   "name": "Viraj",
   "email": "virajboj@gmail.com",
-  "minBudget": 1500,
-  "maxBudget": 5000,
+  "minBudget": 10,
+  "maxBudget": 50000000000,
   "location": "Boston"
 }

@@ -48,5 +48,10 @@ with open("src/lead.json", "r") as file:
         print(testLead.location)
     
     except ValidationError as e:
+
         for x in e.errors():
-            print("Lead blocked by firewall:", x["msg"])
+            print("Lead blocked by firewall:", x["msg"])        
+            with open("src/errors.log", "a") as log_file:
+                log_file.write(f"Lead blocked by firewall: {x['msg']}\n")
+                
+            exit(1)
