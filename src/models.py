@@ -12,3 +12,10 @@ class Lead(BaseModel):
 
 
 
+testLead = Lead(
+    name = "Viraj",
+    email = "virajboj@gmail.com",
+    minBudget = 10,
+    maxBudget = 100,
+    location = "USA"
+)
