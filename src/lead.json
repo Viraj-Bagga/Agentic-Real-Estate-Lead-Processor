@@ -1,7 +1,8 @@
 {
+  "raw_message" : "Hey, I'm Viraj and I was wondering if you could help me find a property? I am looking for a place in boston between 1000 and 5000 dollars, was wondering if you could help me out. Shoot me an email at virajboj@gmail.com!",
   "name": "Viraj",
   "email": "virajboj@gmail.com",
-  "minBudget": 10,
-  "maxBudget": 50000000000,
+  "minBudget": 1000,
+  "maxBudget": 5000,
   "location": "Boston"
 }

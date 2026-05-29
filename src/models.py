@@ -11,6 +11,7 @@ class Lead(BaseModel):
     minBudget: float
     maxBudget: float
     location: str 
+    raw_message: str
 
     #The reason we are checking budget is because if we already know that there is no property in our data base within the budget range, we can automatically reject the lead and make the pipeline more efficent
     @field_validator("minBudget")
@@ -46,6 +47,7 @@ with open("src/lead.json", "r") as file:
         print(testLead.minBudget)
         print(testLead.maxBudget)
         print(testLead.location)
+        print(testLead.raw_message)
     
     except ValidationError as e:
 
