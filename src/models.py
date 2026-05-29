@@ -54,3 +54,5 @@ def processNewLead(filepath: str):
 
                 return None                   
             exit(1)
+
+lead = processNewLead("src/lead.json")
