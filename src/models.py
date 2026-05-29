@@ -37,22 +37,20 @@ class Lead(BaseModel):
 
 
 def processNewLead(filepath: str):
-    with open(filepath, "r") as file:    
-        lead_data = json.load(file)
-        
-        try:
-            testLead = Lead(**lead_data)
-            print("Lead Approved")
-            return testLead
-        
-        except ValidationError as e:
-
-            for x in e.errors():
-                print("Lead blocked by firewall:", x["msg"])        
-                with open("src/errors.log", "a") as log_file:
-                    log_file.write(f"Lead blocked by firewall: {x['msg']}\n")
-
-                return None                   
-            exit(1)
+    try:
+        with open(filepath, "r") as file:
+            lead_data = json.load(file)
+            lead = Lead(**lead_data)
+            print(f"SUCCESS: Lead {lead.name} validated.")
+            return lead
+    except ValidationError as e:
+        error_msg = f"ERROR: Validation failed: {e.json()}"
+        print(error_msg)
+        with open("src/errors.log", "a") as log_file:
+            log_file.write(error_msg + "\n")
+        return None
+    except FileNotFoundError:
+        print("ERROR: File not found.")
+        return None
 
 lead = processNewLead("src/lead.json")
