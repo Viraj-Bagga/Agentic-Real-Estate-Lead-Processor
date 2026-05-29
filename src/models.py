@@ -6,12 +6,12 @@ from pydantic import BaseModel, EmailStr, field_validator, ValidationError, mode
 # Creating class to verify lead
 class Lead(BaseModel):
     #For developement purposes, we will start with just these 5 parameters
+    raw_message: str
     name: str
     email: EmailStr
     minBudget: float
     maxBudget: float
     location: str 
-    raw_message: str
 
     #The reason we are checking budget is because if we already know that there is no property in our data base within the budget range, we can automatically reject the lead and make the pipeline more efficent
     @field_validator("minBudget")
@@ -35,25 +35,22 @@ class Lead(BaseModel):
 
 #Reading lead data from a json file and then processing it
 
-with open("src/lead.json", "r") as file:    
-    lead_data = json.load(file)
-    
-    try:
-        testLead = Lead(**lead_data)
-        print("Lead Approved")
 
-        print(testLead.name)
-        print(testLead.email)
-        print(testLead.minBudget)
-        print(testLead.maxBudget)
-        print(testLead.location)
-        print(testLead.raw_message)
-    
-    except ValidationError as e:
+def processNewLead(filepath: str):
+    with open(filepath, "r") as file:    
+        lead_data = json.load(file)
+        
+        try:
+            testLead = Lead(**lead_data)
+            print("Lead Approved")
+            return testLead
+        
+        except ValidationError as e:
 
-        for x in e.errors():
-            print("Lead blocked by firewall:", x["msg"])        
-            with open("src/errors.log", "a") as log_file:
-                log_file.write(f"Lead blocked by firewall: {x['msg']}\n")
-                
+            for x in e.errors():
+                print("Lead blocked by firewall:", x["msg"])        
+                with open("src/errors.log", "a") as log_file:
+                    log_file.write(f"Lead blocked by firewall: {x['msg']}\n")
+
+                return None                   
             exit(1)
