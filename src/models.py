@@ -2,6 +2,7 @@
 
 import json
 from pydantic import BaseModel, EmailStr, field_validator, ValidationError, model_validator
+from src.memory import save_lead
 
 # Creating class to verify lead
 class Lead(BaseModel):
@@ -53,4 +54,11 @@ def processNewLead(filepath: str):
         print("ERROR: File not found.")
         return None
 
-lead = processNewLead("src/lead.json")
+if __name__ == "__main__":
+    client = chromadb.PersistentClient(path="src/chroma_db")
+    collection = client.get_or_create_collection(name="real_estate_leads")
+
+    lead = processNewLead("src/lead.json")
+    
+    if lead:
+        save_lead(lead, collection) # Now it knows where to find this!
