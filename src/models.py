@@ -3,6 +3,9 @@
 import json
 from pydantic import BaseModel, EmailStr, field_validator, ValidationError, model_validator
 from src.memory import save_lead
+from src.ai_processor import classify_lead
+import chromadb
+
 
 # Creating class to verify lead
 class Lead(BaseModel):
@@ -54,6 +57,14 @@ def processNewLead(filepath: str):
         print("ERROR: File not found.")
         return None
 
+def save_lead(lead: Lead, collection, status: str):
+    collection.add(
+        documents=[lead.raw_message],
+        metadatas=[{"email": lead.email, "min": lead.minBudget, "max": lead.maxBudget, "status": status}],
+        ids=[lead.email] 
+    )
+    print("SUCCESS: Lead stored with AI metadata.")
+
 if __name__ == "__main__":
     client = chromadb.PersistentClient(path="src/chroma_db")
     collection = client.get_or_create_collection(name="real_estate_leads")
@@ -61,4 +72,6 @@ if __name__ == "__main__":
     lead = processNewLead("src/lead.json")
     
     if lead:
-        save_lead(lead, collection) # Now it knows where to find this!
+        status = classify_lead(lead.raw_message)
+        print(f"AI CLASSIFICATION: {status}")
+        save_lead(lead, collection, status)
