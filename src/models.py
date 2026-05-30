@@ -73,6 +73,6 @@ if __name__ == "__main__":
     lead = processNewLead("src/lead.json")
     
     if lead:
-        status = classify_lead(lead.raw_message)
-        logger.info(f"AI CLASSIFICATION: {status}")
-        save_lead(lead, collection, status)
+        classification = classify_lead(lead.raw_message)
+        logger.info(f"AI CLASSIFICATION: {classification.urgency} - {classification.reasoning}")
+        save_lead(lead, collection, classification.urgency)
