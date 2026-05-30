@@ -1,10 +1,11 @@
 # Importing all nessecary packages
-
 import json
 from pydantic import BaseModel, EmailStr, field_validator, ValidationError, model_validator
 from src.memory import save_lead
 from src.ai_processor import classify_lead
 import chromadb
+from src.logger import get_logger
+logger = get_logger("models_module")
 
 
 # Creating class to verify lead
@@ -45,16 +46,16 @@ def processNewLead(filepath: str):
         with open(filepath, "r") as file:
             lead_data = json.load(file)
             lead = Lead(**lead_data)
-            print(f"SUCCESS: Lead {lead.name} validated.")
+            logger.info(f"SUCCESS: Lead {lead.name} validated.")
             return lead
     except ValidationError as e:
         error_msg = f"ERROR: Validation failed: {e.json()}"
-        print(error_msg)
+        logger.error(error_msg)
         with open("src/errors.log", "a") as log_file:
             log_file.write(error_msg + "\n")
         return None
     except FileNotFoundError:
-        print("ERROR: File not found.")
+        logger.error("ERROR: File not found.")
         return None
 
 def save_lead(lead: Lead, collection, status: str):
@@ -73,5 +74,5 @@ if __name__ == "__main__":
     
     if lead:
         status = classify_lead(lead.raw_message)
-        print(f"AI CLASSIFICATION: {status}")
+        logger.info(f"AI CLASSIFICATION: {status}")
         save_lead(lead, collection, status)
